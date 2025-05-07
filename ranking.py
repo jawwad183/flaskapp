@@ -10,6 +10,16 @@ from sentence_transformers import SentenceTransformer, util
 import os
 from dotenv import load_dotenv
 
+try:
+    nltk.data.find("tokenizers/punkt")
+except LookupError:
+    nltk.download("punkt")
+
+try:
+    nltk.data.find("corpora/stopwords")
+except LookupError:
+    nltk.download("stopwords")
+    
 # Setup
 stop_words = set(stopwords.words("english"))
 slang_words = {"u", "ur", "lol", "omg", "btw", "brb", "thx", "pls", "plz"}
