@@ -3,6 +3,7 @@ import numpy as np
 import re
 import openai
 from transformers import pipeline
+import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from spellchecker import SpellChecker
