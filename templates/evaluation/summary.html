@@ -1,0 +1,13 @@
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/evaluation.css') }}">
+</head>
+{% extends 'base_review.html' %}
+
+{% block review_content %}
+<section id="review-section" class="single-column">
+  <div class="review-box summary">
+    <h3>Personalized Reviews Summary</h3>
+    <p>{{ summary_text }}</p>
+  </div>
+</section>
+{% endblock %}

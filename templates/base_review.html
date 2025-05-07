@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Product Review Screen</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/evaluation.css') }}">
+</head>
+
+<body>
+
+  <!-- Add in the body somewhere -->
+  <span id="user-info" data-email="{{ session['email'] }}"></span>
+  <main>
+    <div class="review-instruction">
+      <strong>Instruction:</strong> For each product, please evaluate the <strong>unranked & ranked reviews and
+        personlaized summary of the reviews</strong> provided. Complete the evaluation form by selecting the options
+      that best reflect your understanding, and provide a brief justification for your <strong>purchase
+        decision</strong>, whether you choose <strong>Yes</strong> or
+      <strong>No</strong>. Make sure to <strong>fill out the entire form</strong>, then click the <strong>Next</strong>
+      button to proceed to the next evaluation.
+    </div>
+    <!-- ✅ New Layout: Product/Reviews + Evaluation Form -->
+    <section class="product-eval-container">
+
+      <!-- LEFT COLUMN: Product and Reviews -->
+      <div class="product-review-column">
+
+        <!-- Product Info -->
+        <section id="product-info" class="vertical-product-card">
+          <div class="image-container">
+            <img id="product-img" src="{{ product.Image_path }}" data-product-id="{{ product.product_id }}"
+              data-sub-category="{{ product.sub_category }}" alt="{{ product.title }}">
+          </div>
+          <div class="text-below-image">
+            <h4 id="product-title">{{ product.title }}</h4>
+            <div class="rating" id="product-rating">
+              {% for i in range(1, 6) %}
+              {% if i <= product.avg_rating|int %} ⭐ {% else %} ☆ {% endif %} {% endfor %} ({{ product.avg_rating }})
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews -->
+        <section id="review-section" class="review-box">
+          {% block review_content %}{% endblock %}
+        </section>
+
+      </div>
+
+      <!-- RIGHT COLUMN: Evaluation Form -->
+      <section id="evaluation-wrapper" class="evaluation-section">
+        <h3>Evaluation</h3>
+        <form id="evaluation-form" method="post">
+          <!-- New Questions -->
+          <fieldset>
+            <legend>How satisfied are you with the review(s) provided on this screen?<span style="color: red;">*</span>
+            </legend>
+            <label><input type="radio" name="satisfaction" value="Very dissatisfied"> Very dissatisfied</label><br>
+            <label><input type="radio" name="satisfaction" value="Dissatisfied"> Dissatisfied</label><br>
+            <label><input type="radio" name="satisfaction" value="Neutral"> Neutral</label><br>
+            <label><input type="radio" name="satisfaction" value="Satisfied"> Satisfied</label><br>
+            <label><input type="radio" name="satisfaction" value="Very satisfied"> Very satisfied</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>How confident do you feel about making a purchase decision based on the review(s)?<span
+                style="color: red;">*</span></legend>
+            <label><input type="radio" name="confidence" value="Not confident at all"> Not confident at all</label><br>
+            <label><input type="radio" name="confidence" value="Slightly confident"> Slightly confident</label><br>
+            <label><input type="radio" name="confidence" value="Moderately confident"> Moderately confident</label><br>
+            <label><input type="radio" name="confidence" value="Quite confident"> Quite confident</label><br>
+            <label><input type="radio" name="confidence" value="Very confident"> Very confident</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>How well does the review(s) address your selected preferences?<span style="color: red;">*</span>
+            </legend>
+            <label><input type="radio" name="preference_match" value="Not well at all"> Not well at all</label><br>
+            <label><input type="radio" name="preference_match" value="Slightly well"> Slightly well</label><br>
+            <label><input type="radio" name="preference_match" value="Moderately well"> Moderately well</label><br>
+            <label><input type="radio" name="preference_match" value="Quite well"> Quite well</label><br>
+            <label><input type="radio" name="preference_match" value="Very well"> Very well</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>How easy was it to find information that matches your interests within the review(s)?"<span
+                style="color: red;">*</span>
+            </legend>
+            <label><input type="radio" name="ease_of_finding" value="Very difficult"> Very difficult</label><br>
+            <label><input type="radio" name="ease_of_finding" value="Difficult"> Difficult</label><br>
+            <label><input type="radio" name="ease_of_finding" value="Neutral"> Neutral</label><br>
+            <label><input type="radio" name="ease_of_finding" value="Easy"> Easy</label><br>
+            <label><input type="radio" name="ease_of_finding" value="Very easy"> Very easy</label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Would you make a purchase decision based on this screen?<span style="color: red;">*</span></legend>
+            <label><input type="radio" name="purchase_decision" value="Yes"> Yes</label><br>
+            <label><input type="radio" name="purchase_decision" value="No"> No</label><br>
+
+            <label for="justification">Please provide a brief justification for your decision:</label><br>
+            <textarea name="justification" id="justification"></textarea>
+          </fieldset>
+        </form>
+        <div id="form-error-message" style="color: red; font-weight: 500; margin-top: 10px;"></div>
+      </section>
+    </section>
+
+    <!-- ✅ Bottom Navigation -->
+    <section id="bottom-navigation">
+      <!-- Left: Stepper -->
+      <div class="bottom-left">
+        <div class="stepper-container">
+          {% for i in range(total_products) %}
+          <div class="step {% if i < current_index %}completed{% elif i == current_index %}active{% endif %}">
+            <div class="circle">{{ i + 1 }}</div>
+            <div class="label">Product {{ i + 1 }}</div>
+            {% if i < total_products - 1 %} <div class="line">
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      </div>
+
+      <!-- Right: Button -->
+      <div class="bottom-right">
+        <button id="next-btn" type="button" data-next-url="{{ next_url }}">Next</button>
+      </div>
+    </section>
+  </main>
+  <!-- ✅ Embed JSON for JS -->
+  <script id="product-data" type="application/json">{{ products_json | tojson | safe }}</script>
+  <script id="unranked-data" type="application/json">{{ unranked_reviews_json | tojson | safe }}</script>
+
+  <!-- ✅ JS Logic -->
+  <script src="{{ url_for('static', filename='js/evaluation.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,431 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  padding: 20px 20px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+header {
+  background-color: #f4f4f4;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Header layout */
+#user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.preferences-inline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.preference-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.category-inline {
+  font-weight: bold;
+  min-width: 270px;
+  white-space: nowrap;
+}
+
+.tags-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.tag {
+  background-color: #007bff;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sentiment-container {
+  flex: 1;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.sentiment-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+/* ✅ Main container: 2 columns */
+.product-eval-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* Left column: product info and reviews stacked */
+.product-review-column {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Right column */
+.evaluation-section {
+  flex: 1;
+}
+
+/* Product Card */
+.vertical-product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.image-container img {
+  width: 250px;
+  max-height: 250px;
+  border-radius: 8px;
+  object-fit: contain;
+  border: 1px solid #ccc;
+  background-color: #fdfdfd;
+}
+
+.text-below-image {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.text-below-image h4 {
+  margin: 5px 0;
+}
+
+.rating {
+  color: #f39c12;
+  font-size: 18px;
+}
+
+/* Review section */
+.review-box {
+  height: 790px;
+  /* or any suitable fixed height */
+  overflow-y: auto;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.summary {
+  height: auto;
+  max-height: none;
+}
+
+/* Remove height/scroll from wrapper if it exists */
+#review-section {
+  height: auto;
+  overflow: visible;
+}
+
+/* Review cards */
+.review-box-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: #fff;
+  margin-bottom: 10px;
+}
+
+.review-box-card .stars {
+  font-size: 14px;
+  color: #f39c12;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Evaluation Form Styling */
+#evaluation-wrapper {
+  background-color: #fffdf7;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  color: #443c2e;
+  font-size: 16px;
+}
+
+#evaluation-wrapper h3 {
+  margin-top: 0;
+  /* Remove the top margin */
+  margin-bottom: 20px;
+  /* Optional: adjust spacing below */
+}
+
+/* Remove default fieldset box */
+#evaluation-form fieldset {
+  border: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+/* Question headings */
+#evaluation-form legend,
+#evaluation-form label {
+  font-weight: 500;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* Radio label spacing */
+#evaluation-form input[type="radio"] {
+  margin-right: 8px;
+}
+
+#evaluation-form label input[type="radio"] {
+  margin-right: 10px;
+}
+
+#evaluation-form fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: -10px;
+  /* Reduce vertical spacing */
+  line-height: 1.2;
+  /* Optional: tighter line height */
+}
+
+#evaluation-form fieldset label:last-of-type {
+  margin-bottom: 5px;
+  /* or 12px if you want tighter spacing */
+}
+
+/* Justification Textarea */
+#evaluation-form textarea {
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  height: 100px;
+  max-height: 150px;
+  min-height: 100px;
+  resize: none;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #333;
+  background-color: #fefefe;
+  box-sizing: border-box;
+}
+
+/* Stepper container and layout */
+.stepper-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 16px;
+  /* Optional spacing between steps */
+}
+
+/* Individual step */
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Step number circle */
+.circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Connecting line */
+.line {
+  width: 40px;
+  height: 2px;
+  background-color: #ccc;
+}
+
+/* Active or completed state colors */
+.step.active .circle,
+.step.completed .circle {
+  background-color: #007bff;
+}
+
+.step.completed .line {
+  background-color: #007bff;
+}
+
+/* Step label text */
+.label {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #333;
+  text-align: center;
+}
+
+/* Navigation section */
+#bottom-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  padding: 0 20px;
+  /* Aligned with page/form padding */
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+/* Optional wrappers for left/right alignment */
+.bottom-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.bottom-right {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Button styling */
+button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.review-instruction {
+  width: 100%;
+  background-color: #e6f2ff;
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 1.25rem 2rem;
+  margin: 0 0 1.5rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  main {
+    padding: 20px;
+  }
+
+  .product-eval-container {
+    flex-direction: column;
+  }
+
+  .product-review-column,
+  .evaluation-section {
+    width: 100%;
+  }
+
+  #user-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sentiment-container {
+    text-align: left;
+    margin-top: 0;
+  }
+
+  .sentiment-row {
+    justify-content: flex-start;
+    padding-bottom: 10px;
+  }
+
+  .category-inline {
+    margin-bottom: 6px;
+    margin-right: 0;
+    display: block;
+  }
+
+  .preference-line {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  /* Align review box to match page padding */
+  .review-box {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  /* Prevent form overflow and align with page */
+  #evaluation-wrapper {
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Prevent horizontal scroll from entire layout */
+  body,
+  html {
+    overflow-x: hidden;
+  }
+
+  #bottom-navigation {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .bottom-left,
+  .bottom-right {
+    width: 100%;
+  }
+
+  .bottom-right {
+    justify-content: flex-end;
+  }
+
+  .review-instruction {
+    font-size: 0.95rem;
+    padding: 1rem;
+  }
+}

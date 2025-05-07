@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+
+# Flask static/videos
+static/videos/
+
+# Node.js stuff if present
+node_modules/

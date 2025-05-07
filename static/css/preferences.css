@@ -1,0 +1,145 @@
+/* Base styles (Desktop First) */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden; /* ✅ Prevent horizontal scrolling */
+  background-color: #f7f7f7;
+  box-sizing: border-box; /* ✅ Important for width calculations */
+}
+
+*, *::before, *::after {
+  box-sizing: inherit; /* ✅ All elements use border-box model */
+}
+
+.main-container {
+  display: flex;
+  height: 100vh;
+}
+
+.left-container {
+  flex: 1;
+  padding: 30px;
+  background-color: #e8f0fe;
+  overflow-y: auto;
+}
+
+.right-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  padding: 30px;
+  position: relative;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.checkbox-group {
+  margin-bottom: 30px;
+}
+
+.next-button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: right;
+  background-color: white;
+  position: sticky;
+  bottom: 0;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* ------------------------------------------------- */
+/* RESPONSIVE MEDIA QUERIES                          */
+/* ------------------------------------------------- */
+
+/* Large laptops (1200px and below) */
+@media (max-width: 1200px) {
+  .left-container, .right-container {
+    padding: 20px;
+  }
+}
+
+/* Tablets (992px and below) */
+@media (max-width: 991px) {
+  .main-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .left-container, .right-container {
+    flex: none;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .next-button {
+    text-align: center;
+  }
+}
+
+/* Tablets and large phones (768px and below) */
+@media (max-width: 768px) {
+  .left-container, .right-container {
+    padding: 15px;
+  }
+
+  h2, h3 {
+    font-size: 20px;
+  }
+
+  button {
+    width: auto; /* ✅ button natural size */
+    font-size: 18px;
+    padding: 12px 30px;
+    display: inline-block;
+  }
+
+  .next-button {
+    text-align: center;
+  }
+}
+
+/* Phones (500px and below) */
+@media (max-width: 500px) {
+  h2, h3 {
+    font-size: 18px;
+  }
+
+  .checkbox-group label {
+    font-size: 16px;
+  }
+
+  button {
+    width: auto; /* ✅ smaller button */
+    font-size: 16px;
+    padding: 10px 25px;
+    display: inline-block;
+  }
+}

@@ -1,0 +1,17 @@
+{% extends 'base_review.html' %}
+
+{% block review_content %}
+<section id="review-section" class="single-column">
+  <div id="unranked-reviews" class="review-box ranked">
+    <!-- <h3>Ranked Reviews</h3> -->
+    {% for review in reviews %}
+    <div class="review-box-card">
+      <div class="stars">⭐ {{ review.star_rating }}</div>
+      <p>{{ review.review_body }}</p>
+    </div>
+    {% else %}
+    <p>No ranked reviews available.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

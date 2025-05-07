@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup for Study</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <!-- Main content -->
+    <div id="main-content">
+        <div class="outer-container">
+            <div class="left-container">
+                <h2>🧪 Project Title</h2>
+                <p><strong>Improving User Experience with Personalized Review Ranking and Summarization</strong></p>
+
+                <h2>🎯 Study Purpose</h2>
+                <p>The goal of this study is to evaluate how users perceive and prefer <strong>unranked vs. ranked
+                        product reviews</strong>
+                    based on their preferences. It also compares them to <strong>personalized review summaries</strong>
+                    tailored to the user's preferences and sentiments.
+                </p>
+
+                <h2>📋 Study Guidelines</h2>
+                <ul>
+                    <li>Use a <strong>valid email</strong>. Each email is <strong>unique.</strong>.</li>
+                    <li>Select <strong>at least 5 preferences per category during singup.</strong>.</li>
+                    <li>Rate and review at least one product in each category.</li>
+                    <li>Evaluate the <strong>ranked & unranked</strong> reviews and <strong>personalized review summaries.</strong>.</li>
+                </ul>
+
+                <!-- ✅ Data Use Disclaimer -->
+                <div
+                    style="margin-top: 20px; padding: 10px; background-color: #f9f9f9; border-left: 4px solid #4CAF50;">
+                    <strong>🛡️ Data Use Statement:</strong><br>
+                    The information collected in this study will be used solely for research and evaluation purposes.
+                    All responses will remain confidential and anonymized.
+                </div>
+            </div>
+
+
+            <div class="right-container">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <script>alert("{{ messages[0] }}");</script>
+                {% endif %}
+                {% endwith %}
+
+                <form id="signupForm" action="/submit" method="POST">
+                    <h1>Signup Please</h1>
+
+                    <label>Email:</label>
+                    <input type="email" id="email" name="email" required value="{{ request.form.get('email', '') }}">
+
+                    <label>Name:</label>
+                    <input type="text" id="name" name="name" required value="{{ request.form.get('name', '') }}">
+
+                    <label>Age Group:</label>
+                    <select id="age" name="age" required>
+                        <option value="">Select Age Group</option>
+                        <option value="18-25" {% if request.form.get('age')=='18-25' %}selected{% endif %}>18-25
+                        </option>
+                        <option value="26-35" {% if request.form.get('age')=='26-35' %}selected{% endif %}>26-35
+                        </option>
+                        <option value="36-45" {% if request.form.get('age')=='36-45' %}selected{% endif %}>36-45
+                        </option>
+                        <option value="46+" {% if request.form.get('age')=='46+' %}selected{% endif %}>46+</option>
+                    </select>
+
+                    <h2>User Preferences</h2>
+
+                    <div class="preference-grid">
+                        <div class="preference-block">
+                            <label for="generalPref">General Preferences</label>
+                            <select id="generalPref"></select>
+                            <div class="preference-list" id="generalList"></div>
+                        </div>
+
+                        <div class="preference-block">
+                            <label for="phonePref">Phone Case & Cover</label>
+                            <select id="phonePref"></select>
+                            <div class="preference-list" id="phoneList"></div>
+                        </div>
+
+                        <div class="preference-block">
+                            <label for="chargerPref">Chargers and Cables</label>
+                            <select id="chargerPref"></select>
+                            <div class="preference-list" id="chargerList"></div>
+                        </div>
+
+                        <div class="preference-block">
+                            <label for="screenPref">Screen Protectors</label>
+                            <select id="screenPref"></select>
+                            <div class="preference-list" id="screenList"></div>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="ordered_general" id="ordered_general">
+                    <input type="hidden" name="ordered_phone" id="ordered_phone">
+                    <input type="hidden" name="ordered_charger" id="ordered_charger">
+                    <input type="hidden" name="ordered_screen" id="ordered_screen">
+                    <button type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/signup.js') }}"></script>
+</body>
+
+</html>

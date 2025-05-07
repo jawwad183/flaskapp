@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Review</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reviews.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Column -->
+        <div class="left-panel">
+            {% for category in categories %}
+            <div class="category-block">
+                <div class="category-label">{{ category }}</div>
+                <div class="product-card-container">
+                    {% for product in products if product.sub_category == category %}
+                    <div class="product-card" data-id="{{ product.product_id }}" data-title="{{ product.title }}"
+                        data-image="{{ url_for('static', filename='images/' ~ product.Image_path) }}"
+                        data-video="{{ product.video }}">
+                        <img src="{{ url_for('static', filename='images/' ~ product.Image_path) }}"
+                            alt="{{ product.title }}">
+                        <div class="product-title">
+                            {{ product.title[:20] }}{{ '...' if product.title|length > 20 else '' }}
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-panel">
+            <div class="review-instruction">
+                <strong>Instruction:</strong> Please rate and review <strong>at least one product per category</strong>. After writing a review, be sure to click the <strong>Submit</strong> button to save it. Once you've submitted a review for each category, click the <strong>Next</strong> button to begin evaluating <strong>ranked reviews and summaries</strong>.
+            </div>
+            <div class="product-preview">
+
+                <div class="media-row">
+                    <img id="productImage" src="" alt="Product Image" />
+                    <video id="productVideo" width="320" height="240" controls>
+                        <source id="videoSource" src="" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div style="clear: both;"></div>
+                <!-- Product Title -->
+                <h2 id="productTitle">Select a product to view details</h2>
+
+                <!-- Star Rating -->
+                <div class="rating">
+                    <span class="star" data-value="1">&#9733;</span>
+                    <span class="star" data-value="2">&#9733;</span>
+                    <span class="star" data-value="3">&#9733;</span>
+                    <span class="star" data-value="4">&#9733;</span>
+                    <span class="star" data-value="5">&#9733;</span>
+                </div>
+
+                <!-- Review Box -->
+                <textarea id="review" placeholder="Write your review (30-100 words) here..."></textarea>
+
+                <!-- Submit Button -->
+                <button id="submitBtn">Submit</button>
+            </div>
+
+            <!-- Next Button (conditionally shown) -->
+            <button id="nextBtn">Next</button>
+        </div>
+    </div>
+
+    <!-- Embed product data as JSON -->
+    <script id="product-data" type="application/json">
+        {{ products | tojson | safe }}
+      </script>
+
+    <!-- Optional: Link to your JS file -->
+    <script src="{{ url_for('static', filename='js/reviews.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferences</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/preferences.css') }}">
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="left-container">
+            <h2>Guidelines</h2>
+            <ul>
+                <li>Dummy Guideline 1</li>
+                <li>Dummy Guideline 2</li>
+                <li>Dummy Guideline 3</li>
+                <li>Dummy Guideline 4</li>
+            </ul>
+        </div>
+
+        <div class="right-container">
+        <form id="preferencesForm" action="/save_preferences" method="POST">
+
+            <div class="scroll-area">
+                {% for category in categories %}
+                <h3>{{ category }}</h3>
+                <div class="checkbox-group">
+                    {% for pref in preferences[category] %}
+                    <label><input type="checkbox" name="{{ category }}" value="{{ pref }}"> {{ pref }}</label><br>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="next-button">
+                <button type="submit">Next</button>
+            </div>
+
+        </form>
+    </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/preferences.js') }}"></script>
+</body>
+
+</html>
